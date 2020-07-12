@@ -1,4 +1,4 @@
-## About Laravel
+## About Ask Mee
 
 Ask Mee adalah sebuah final project untuk kelas Laravel yang diadakan oleh Sanbercode batch Juni
 Tugas yang diberikan adalah untuk membuat sebuah clone dari web stack overflow menggunakan laravel
