@@ -8,32 +8,6 @@ use Illuminate\Http\Request;
 
 class JawabanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Pertanyaan $question)
     {
         $jawaban = new Jawaban;
@@ -45,26 +19,11 @@ class JawabanController extends Controller
         return redirect('question/'.$question->uuid)->with('success', 'Jawaban Anda Berhasil Disimpan');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Model\Jawaban  $jawaban
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Jawaban $jawaban)
+    public function edit(Jawaban $answer)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Model\Jawaban  $jawaban
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Jawaban $jawaban)
-    {
-        //
+        $data['pertanyaan'] = $answer->pertanyaan;
+        $data['jawaban'] = $answer;
+        return view('jawaban.edit', $data);
     }
 
     /**
@@ -74,9 +33,11 @@ class JawabanController extends Controller
      * @param  \App\Model\Jawaban  $jawaban
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Jawaban $jawaban)
+    public function update(Request $request, Jawaban $answer)
     {
-        //
+        $answer->content = request('content');
+        $answer->save();
+        return redirect('question/'.$answer->pertanyaan->uuid)->with('success', 'Jawaban Anda Berhasil Disimpan');
     }
 
     /**
@@ -85,9 +46,10 @@ class JawabanController extends Controller
      * @param  \App\Model\Jawaban  $jawaban
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Jawaban $jawaban)
+    public function destroy(Jawaban $answer)
     {
-        //
+        $answer->delete();
+        return back()->with('success', 'Jawaban Berhasil Dihapus');
     }
 
 }

@@ -25,6 +25,9 @@
         <div class="container custom py-5">
             <div class="row">
                 <div  class="col-md-12">
+                    <h2>
+                        Pertanyaan Terkait Kata Kunci :  {{$search}}
+                    </h2>
                     <div class="inner-question bg-white">
                         @foreach($list_pertanyaan as $pertanyaan)
                             <article  class="article-question article-post clearfix question-type-normal home">

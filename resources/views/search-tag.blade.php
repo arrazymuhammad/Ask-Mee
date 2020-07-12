@@ -1,30 +1,12 @@
 @extends('template.base')
 
 @section('content')
-        <div class="upper-search"> 
-            <div class="container custom">
-                <div class="row justify-content-sm-center">
-                    <div class="col-sm-11 col-md-10 col-lg-10">
-                        <h3 class="heading-main">
-                            Share & grow the world's knowledge!
-                        </h3>
-                        <p class="sub-heading">AskMee is the largest online community for programmers to learn, share their knowledge and build their careers.</p>
-                    </div>
-                    <div class="col-sm-11 col-md-7">
-                        <form action="{{url('search')}}" method="post">
-                            @csrf
-                            <div class="inner-search row">
-                                <input type="text" name="search" class="col-9 col-sm-10 col-md-11  main-search" placeholder="Search">
-                                <button id="searchBtn" class="col-3 col-sm-2 col-md-1  btn btn-search-upper"><i class="icon ion-md-search"></i></button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div> 
         <div class="container custom py-5">
             <div class="row">
                 <div  class="col-md-12">
+                    <h2>
+                        Pertanyaan Terkait Tag :  {{$tag}}
+                    </h2>
                     <div class="inner-question bg-white">
                         @foreach($list_pertanyaan as $pertanyaan)
                             <article  class="article-question article-post clearfix question-type-normal home">

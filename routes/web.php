@@ -20,8 +20,12 @@ Route::post('register', 'AuthController@register');
 Route::get('logout', 'AuthController@logout');
 
 Route::resource('question', 'PertanyaanController');
-Route::post('question/{question}/comment', 'JawabanController@store');
+Route::post('answer/{question}', 'JawabanController@store');
+Route::resource('answer', 'JawabanController')->only(['edit', 'update', 'destroy']);
 
 Route::get('best-answer/{answer}', 'MainController@bestAnswer');
 Route::get('vote/{type}/{id}/{vote_type}', 'MainController@vote');
 Route::post('comment', 'MainController@comment');
+Route::delete('comment/{comment}', 'MainController@deleteComment');
+Route::get('tag/{tag}', 'MainController@tagSearch');
+Route::post('search', 'MainController@search');

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title></title>
+	<title>Ask Mee</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="shortcut icon" type="image/png" href=""/>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
@@ -28,8 +28,10 @@
 </head>
 <body>
 	@include('template.header')
-	<div class="main-body">
-		@include('template.notif')
+	<div class="main-body" style="min-height: 78vh">
+		<div class="container custom"   style="padding: 10px">
+			@include('template.notif')
+		</div>
 		@yield('content')
 	</div>
 

@@ -12,7 +12,7 @@ class MainController extends Controller
 {
     public function landing()
     {
-    	$data['list_pertanyaan'] = Pertanyaan::orderBy('created_at', 'DESC')->paginate(1);
+    	$data['list_pertanyaan'] = Pertanyaan::orderBy('created_at', 'DESC')->paginate(10);
     	return view('welcome', $data);
     }
 
@@ -44,7 +44,7 @@ class MainController extends Controller
     	$user->point += ($vote_type == 'up') ? 10 : -1;
     	$user->save();
 
-        return back()->with('success', 'Vote Berhasil Di Simpan');
+        return back()->with('success', 'Vote Berhasil Disimpan');
     }
     public function comment()
     {
@@ -56,6 +56,27 @@ class MainController extends Controller
         $comment->content = request('content');
         $comment->save();
 
-        return back()->with('success', 'Komentar Berhasil Di Simpan');
+        return back()->with('success', 'Komentar Berhasil Disimpan');
+    }
+
+    public function deleteComment(Komentar $comment)
+    {
+        $comment->delete();
+        return back()->with('success', 'Komentar Berhasil Dihapus');
+    }
+
+    public function search()
+    {
+        $search = request('search');
+        $data['search'] = $search;
+        $data['list_pertanyaan'] = Pertanyaan::where('judul','like', "%$search%")->paginate(10);;
+        return view('search', $data);
+
+    }
+    public function tagSearch($tag)
+    {
+        $data['tag'] = $tag;
+        $data['list_pertanyaan'] = Pertanyaan::whereJsonContains('tags', $tag)->paginate(10);;
+        return view('search-tag', $data);
     }
 }

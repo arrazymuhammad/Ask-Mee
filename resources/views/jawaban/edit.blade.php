@@ -70,81 +70,10 @@
 												@endforeach
 											</div>
 									   </div>
-									   @include('pertanyaan.komentar', ['item' => $pertanyaan, 'parent_type' => 1])
 									</div>
 								</div>
 							</div>
 						</article>
-					</div>
-					<div class="inner-question bg-white">
-						@foreach($pertanyaan->jawaban as $jawaban)
-						<article class="article-question  article-post clearfix question-type-normal @if($jawaban->is_best) bg-best @endif">
-							<div class="single-inner-content">
-								<div class="question-inner row">
-									<div class="col-sm-2 col-md-2 col-lg-2 col-6 px-lg-1 ">
-										<div class=" question-image-vote px-sm-0 text-center vote-bg">
-											@if(Auth::check() && !$jawaban->is_mine && !$jawaban->is_voted)
-											<a class="question_vote_up vote_not_user" href="{{url('vote/answer', $jawaban->uuid)}}/up" title="Like"><i class="fa fa-caret-up fa-2x" aria-hidden="true"></i></a>
-											@else
-											<a class="question_vote_up vote_not_user text-dark" href="#" title="Like"><i class="fa fa-caret-up fa-2x" aria-hidden="true"></i></a>
-											@endif
-											<span class="vote votesCount#">{{$jawaban->voted_count}} Votes</span> 
-											@if(Auth::check() && !$jawaban->is_mine && !$jawaban->is_voted && Auth::user()->point >= 15)
-											<a class="question_vote_down vote_not_user" href="{{url('vote/answer', $jawaban->uuid)}}/down" title="Dislike"><i class="fa fa-caret-down fa-2x" aria-hidden="true"></i></a>
-											@else
-											<a class="question_vote_down vote_not_user text-dark" href="#" title="Dislike"><i class="fa fa-caret-down fa-2x" aria-hidden="true"></i></a>
-											@endif
-										</div>	
-										@if($jawaban->is_best)
-										<div class="row">
-											<div class="col-md-12 text-center">
-												<i class="fa fa-check fa-3x text-success"></i>
-											</div>
-										</div>
-										@endif
-									</div>
-									<div class="col-md-10 answer-section">
-										<div class="row">
-											<div class="col-md-12">	
-												<div class="question-content question-content-second">
-													<div class="post-wrap-content">
-													   	<div class="question-content-text">
-															{!!$jawaban->content!!}
-													   	</div>
-													</div>
-													<div class="answer-info bg-info">
-														<a class="post-author text-white" href="#">{{$jawaban->user->name}}</a><br>
-														<span class="comment-date text-white" style="font-size: 12px"> Dijawab {{ $jawaban->created_at->diffForHumans()}} </span>
-														@if($pertanyaan->is_mine && !$pertanyaan->id_jawaban_terbaik)
-														<a href="{{url('best-answer', $jawaban->uuid)}}" class="btn btn-success d-block"><i class="fa fa-check"></i> Jawaban Terbaik</a>
-														@endif
-														@if($jawaban->is_mine)
-															<div class="col-md-12">
-																<div class="btn-group d-flex">
-																	<a href="{{url('answer', $jawaban->uuid)}}/edit" class="btn btn-warning w-100"><i class="fa fa-edit"></i></a>
-																	<form action="{{url('answer', $jawaban->uuid)}}" method="post" style="display: inline" class=" w-100">
-																		@csrf
-																		@method('delete')
-																		<button class="btn btn-danger w-100" onclick="return confirm('Yakin menghapus jawaban ini?')" ><i class="fa fa-remove"></i></button>
-																	</form>
-																</div>
-															</div>
-														@endif
-													</div>
-												</div>
-											</div>
-										</div>
-										<hr>
-										<div class="row">
-											<div class="col-md-12">
-										   		@include('pertanyaan.komentar', ['item' => $jawaban, 'parent_type' => 2])
-											</div>
-										</div>
-									</div>
-								</div>								
-							</div>
-						</article>
-						@endforeach
 					</div>
 				</div>
 			</div>
@@ -154,10 +83,11 @@
 				<div class="row">
 					<div class="col-md-12">
 						@if(Auth::check())
-						<form action="{{url('answer', $pertanyaan->uuid)}}" method="post">
+						<form action="{{url('answer', $jawaban->uuid)}}" method="post">
 							@csrf
+							@method('put')
 							<div class="form-group">
-								<textarea name="content" class="text-comment textarea" class="form-control"></textarea>
+								<textarea name="content" class="text-comment textarea" class="form-control">{!!$jawaban->content!!}</textarea>
 							</div>
 							<div class="form-group">
 								<button class="btn btn-leave-comment w-100 mb-1">Submit an answer</button>
