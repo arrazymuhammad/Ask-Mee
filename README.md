@@ -16,3 +16,12 @@ Adapun Spesifikasinya adalah Sebagai Berikut
 - Pembuat pertanyaan dapat menandai jawaban yang menurut dia paling tepat menyelesaikan masalahnya. 
 - Setiap jawaban yang ditandai sebagai jawaban tepat maka pengguna yang membuat jawaban tersebut mendapatkan tambahan reputasi 15 poin.
 - Pengguna yang boleh downvote adalah pengguna dengan reputasi minimal 15 poin
+
+## Tampilan Aplikasi
+![ERD CHEN](public/images/app.png)
+
+## ERD CHEN
+![ERD CHEN](public/images/erd-chen.png)
+
+## TABLE RELATIONSHIP
+![ERD CHEN](public/images/table_relation.png)
